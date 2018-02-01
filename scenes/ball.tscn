@@ -27,9 +27,9 @@ can_sleep = true
 linear_velocity = Vector2( 200, -200 )
 linear_damp = 0.0
 angular_velocity = 0.0
-angular_damp = -1.0
+angular_damp = 0.0
 script = ExtResource( 1 )
-_sections_unfolded = [ "Linear", "Transform" ]
+_sections_unfolded = [ "Angular", "Linear", "Transform" ]
 __meta__ = {
 "_edit_group_": true
 }
@@ -38,7 +38,7 @@ __meta__ = {
 
 scale = Vector2( 4, 4 )
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="collision" type="CollisionShape2D" parent="." index="1"]
 

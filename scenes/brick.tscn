@@ -1,13 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://sprites/brick.png" type="Texture" id=1]
+[ext_resource path="res://scripts/brick.gd" type="Script" id=1]
+[ext_resource path="res://sprites/brick.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 30, 14 )
 
-[node name="brick" type="StaticBody2D" groups=[
+[node name="brick" type="StaticBody2D" index="0" groups=[
 "bricks",
 ]]
 
@@ -18,18 +19,20 @@ constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
+script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_group_": true
 }
+initial_hitpoints = 1
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
+[node name="sprite" type="Sprite" parent="." index="0"]
 
 scale = Vector2( 2, 2 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+[node name="collision" type="CollisionShape2D" parent="." index="1"]
 
 shape = SubResource( 1 )
 

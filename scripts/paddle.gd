@@ -2,9 +2,16 @@ extends KinematicBody2D
 
 const ball_scene = preload("res://scenes/ball.tscn")
 
+var max_speed = 500
+var acceleration = 10
+var break_strength = 20
+
 func _physics_process(delta):
-	# TODO: Implement slower movement.
-	position.x = get_viewport().get_mouse_position().x
+	var target = get_viewport().get_mouse_position().x
+	if target < position.x:
+		position.x = max(target, position.x - max_speed * delta)
+	elif target > position.x:
+		position.x = min(target, position.x + max_speed * delta)
 
 func _input(event):
 	if event is InputEventMouseButton:
