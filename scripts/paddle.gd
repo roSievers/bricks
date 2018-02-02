@@ -3,8 +3,6 @@ extends KinematicBody2D
 const ball_scene = preload("res://scenes/ball.tscn")
 
 var max_speed = 500
-var acceleration = 10
-var break_strength = 20
 
 func _physics_process(delta):
 	var target = get_viewport().get_mouse_position().x
