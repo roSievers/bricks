@@ -18,4 +18,5 @@ func _input(event):
 		if not event.is_pressed() and event.button_index == 1:
 			var ball = ball_scene.instance()
 			ball.position = position - Vector2(0, 16)
-			get_tree().root.add_child(ball)
+			var balls = get_node("/root/world/balls")
+			balls.add_child(ball)

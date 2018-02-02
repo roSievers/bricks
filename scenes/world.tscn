@@ -10,7 +10,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 40, 4 )
 
-[node name="world" type="Node2D"]
+[node name="world" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -18,15 +18,17 @@ script = ExtResource( 1 )
 "paddle",
 ]]
 
-editor/display_folded = true
-position = Vector2( 320, 336 )
+position = Vector2( 320, 320 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="Sprite" type="Sprite" parent="paddle" index="0"]
+[node name="sprite" type="Sprite" parent="paddle" index="0"]
 
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
@@ -74,6 +76,30 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 text = "Score: 0"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="balls" type="Node" parent="." index="4"]
+
+[node name="instructions" type="Label" parent="." index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 128.0
+margin_top = 320.0
+margin_right = 512.0
+margin_bottom = 352.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Press left mouse button to launch a ball."
+align = 1
+valign = 2
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1

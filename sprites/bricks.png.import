@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/brick_damage.png-e8db4d0001e95240fde5b112df46aae2.stex"
+path="res://.import/bricks.png-689683ecfff23fdf0d01d90616589665.stex"
 
 [deps]
 
-source_file="res://sprites/brick_damage.png"
-source_md5="14946b59958a2d90c2e9c60988cae876"
+source_file="res://sprites/bricks.png"
+source_md5="1efed882d9106ca91f254833e9845495"
 
-dest_files=[ "res://.import/brick_damage.png-e8db4d0001e95240fde5b112df46aae2.stex" ]
-dest_md5="99f7fa587b2d0f9f94c11f7e33042f20"
+dest_files=[ "res://.import/bricks.png-689683ecfff23fdf0d01d90616589665.stex" ]
+dest_md5="6b42f2edbff37e2f5e5a114219a62077"
 
 [params]
 
