@@ -25,4 +25,5 @@ func _physics_process(delta):
 
 	if position.y > get_viewport_rect().size.y + 10:
 		queue_free()
-		get_node("/root/world").score -= 10
+		var world = get_node("/root/world")
+		world.loose_ball(self)

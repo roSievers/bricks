@@ -20,3 +20,5 @@ func _input(event):
 			ball.position = position - Vector2(0, 16)
 			var balls = get_node("/root/world/balls")
 			balls.add_child(ball)
+			
+			get_node("/root/world").update_instructions()
