@@ -1,8 +1,13 @@
 extends Node2D
 
-const level_1 = preload("res://scenes/levels/level_1.tscn")
-const score_indicator = preload("res://scenes/score_gain_indicator.tscn")
+const levels = [
+	preload("res://scenes/levels/level_1.tscn"),
+	preload("res://scenes/levels/level_2.tscn"), 
+	preload("res://scenes/levels/level_3.tscn")]
 
+var level = 1 setget set_level
+
+const score_indicator = preload("res://scenes/score_gain_indicator.tscn")
 var score = 0 setget set_score
 
 # This is not consistent with inline get_node("score"). Which one is better?
@@ -15,20 +20,16 @@ func _ready():
 
 func gain_score(source, ball_chain_multiplier):
 	var ball_count_multiplier = get_node("balls").get_child_count()
-	var additional_score = ball_chain_multiplier * ball_count_multiplier
+	var additional_score = ball_chain_multiplier * ball_count_multiplier * level
 	set_score(score + additional_score)
 	
 	# Show a label with the score value to inform the player.
-	var score = score_indicator.instance()
-	score.set_caption(str(additional_score))
-	# Copy brick position and color
-	score.position = source.position
-	score.color = source.modulate
-	add_child(score)
+	spawn_label(str(additional_score), source.position, source.modulate)
 
 func loose_ball(ball):
-	set_score(score - 10)
-	spawn_label("-10", ball.position, Color(1, 0, 0))
+	var loss = - 10 * level * level
+	set_score(score + loss)
+	spawn_label(str(loss), ball.position, Color(1, 0, 0))
 	
 	# Remove the ball already, so we can update the instructions directly.
 	get_node("balls").remove_child(ball)
@@ -51,14 +52,20 @@ func update_instructions():
 	elif ball_count == 1:
 		label.text = "You can launch more than one ball at a time."
 	elif ball_count >= 2:
-		label.text = "You loose 10 Points for each dropped ball."
+		var loss = 10 * level * level
+		label.text = "You loose "+str(loss)+" Points for each dropped ball."
 
 func set_score(new_score):
 	score = new_score
 	get_node("score").text = "Score: " + str(score)
 
+func set_level(new_level):
+	level = new_level
+	get_node("level").text = "Level: " + str(level)
+
 func game_over():
 	clear()
+	set_level(level + 1)
 	load_level()
 	
 func clear():
@@ -73,6 +80,6 @@ func clear():
 		child.queue_free()
 
 func load_level():
-	bricks_node = level_1.instance()
+	bricks_node = levels[(level-1)%3].instance()
 	bricks_node.name = "bricks"
 	add_child(bricks_node)
