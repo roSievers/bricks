@@ -2,7 +2,7 @@ extends Node2D
 
 const levels = [
 	preload("res://scenes/levels/level_1.tscn"),
-	preload("res://scenes/levels/level_2.tscn"), 
+	preload("res://scenes/levels/level_2.tscn"),
 	preload("res://scenes/levels/level_3.tscn")]
 
 var level = 1 setget set_level
@@ -22,7 +22,7 @@ func gain_score(source, ball_chain_multiplier):
 	var ball_count_multiplier = get_node("balls").get_child_count()
 	var additional_score = ball_chain_multiplier * ball_count_multiplier * level
 	set_score(score + additional_score)
-	
+
 	# Show a label with the score value to inform the player.
 	spawn_label(str(additional_score), source.position, source.modulate)
 
@@ -30,7 +30,7 @@ func loose_ball(ball):
 	var loss = - 10 * level * level
 	set_score(score + loss)
 	spawn_label(str(loss), ball.position, Color(1, 0, 0))
-	
+
 	# Remove the ball already, so we can update the instructions directly.
 	get_node("balls").remove_child(ball)
 	update_instructions()
@@ -53,7 +53,7 @@ func update_instructions():
 		label.text = "You can launch more than one ball at a time."
 	elif ball_count >= 2:
 		var loss = 10 * level * level
-		label.text = "You loose "+str(loss)+" Points for each dropped ball."
+		label.text = "You lose "+str(loss)+" points for each dropped ball."
 
 func set_score(new_score):
 	score = new_score
@@ -67,14 +67,14 @@ func game_over():
 	clear()
 	set_level(level + 1)
 	load_level()
-	
+
 func clear():
 	# Remove old level node
 	bricks_node.queue_free()
 	# We remove it from the tree, because we add an new
 	# object with the same name immediately.
 	remove_child(bricks_node)
-	
+
 	# delete all active balls
 	for child in balls_node.get_children():
 		child.queue_free()
