@@ -1,8 +1,10 @@
 extends StaticBody2D
 
-export var initial_hitpoints = 1
-var hitpoints setget set_hitpoints
+# Signal broken { brick: Brick, ball_multiplier: Int }
+signal broken
 
+export var initial_hitpoints = 1
+var hitpoints
 
 func _ready():
 	randomize()
@@ -11,18 +13,15 @@ func _ready():
 	modulate.s = 1
 	modulate.v = 0.5
 
-func set_hitpoints(new_hitpoints):
-	hitpoints = new_hitpoints
-	if new_hitpoints <= 0:
-		on_destroy()
+# Called, when a ball hits the brick.
+func register_hit(ball):
+	hitpoints -= 1
+	if hitpoints <= 0:
+		# FIXME: First check if I have a parent.
+		get_parent().remove_child(self) # Important for counting.
+		emit_signal("broken", self, ball.multiplier)
+		queue_free()
 	else:
+		# TODO: Add more damage states (and images)
 		var sprite = find_node("sprite")
 		sprite.frame = randi()%3 + 1
-
-func on_destroy():
-	queue_free()
-	
-	# Here we substract 1, because self still is a child of its parent.
-	var other_brick_count = get_parent().get_child_count() - 1
-	if other_brick_count == 0:
-		get_node("/root/world").game_over()

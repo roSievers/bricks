@@ -8,31 +8,43 @@ const levels = [
 var level = 1 setget set_level
 
 const score_indicator = preload("res://scenes/score_gain_indicator.tscn")
-var score = 0 setget set_score
-
-# This is not consistent with inline get_node("score"). Which one is better?
-var bricks_node
-var balls_node
+var score = 0
+var health = 100
 
 func _ready():
-	bricks_node= get_node("bricks")
-	balls_node = get_node("balls")
+	var bricks = get_node("bricks")	
+	
+	bricks.connect("brick_broken", self, "_on_brick_broken")
+	bricks.connect("level_clear", self, "_on_level_clear")
 
-func gain_score(source, ball_chain_multiplier):
-	var ball_count_multiplier = get_node("balls").get_child_count()
-	var additional_score = ball_chain_multiplier * ball_count_multiplier * level
-	set_score(score + additional_score)
+func get_ball_count_multiplier():
+	return get_node("balls").get_child_count()
+
+func _on_brick_broken(brick, ball_chain_multiplier):
+	var additional_score = ball_chain_multiplier * get_ball_count_multiplier() * level
+	score += additional_score
+	health += additional_score
+	update_score_label()
+	update_health_label()
 	
 	# Show a label with the score value to inform the player.
-	spawn_label(str(additional_score), source.position, source.modulate)
+	spawn_label(str(additional_score), brick.position, brick.modulate)
 
-func loose_ball(ball):
-	var loss = - 10 * level * level
-	set_score(score + loss)
-	spawn_label(str(loss), ball.position, Color(1, 0, 0))
+func _on_ball_dropped(last_known_position):
+	var loss = 10 * level * level
+	health -= loss
+	update_health_label()
 	
-	# Remove the ball already, so we can update the instructions directly.
-	get_node("balls").remove_child(ball)
+	if health <= 0:
+		# TODO: Figure out how to transfer the score value to the game_over scene.
+		get_tree().change_scene("res://scenes/game_over.tscn")
+	
+	var label_position = Vector2(last_known_position.x, get_viewport_rect().size.y)
+	spawn_label(str(-loss), last_known_position, Color(1, 0, 0))
+	
+	update_instructions()
+
+func _on_ball_spawned():
 	update_instructions()
 
 # Show a label with the score value to inform the player.
@@ -53,33 +65,29 @@ func update_instructions():
 		label.text = "You can launch more than one ball at a time."
 	elif ball_count >= 2:
 		var loss = 10 * level * level
-		label.text = "You loose "+str(loss)+" Points for each dropped ball."
+		label.text = "You lose "+str(loss)+" health for each dropped ball."
 
-func set_score(new_score):
-	score = new_score
+func update_score_label():
 	get_node("score").text = "Score: " + str(score)
 
+func update_health_label():
+	get_node("health").text = "Health: " + str(health)
+	
 func set_level(new_level):
 	level = new_level
 	get_node("level").text = "Level: " + str(level)
 
-func game_over():
-	clear()
+func _on_level_clear():
+	# delete all active balls
+	for child in get_node("balls").get_children():
+		child.queue_free()
+		
 	set_level(level + 1)
 	load_level()
-	
-func clear():
-	# Remove old level node
-	bricks_node.queue_free()
-	# We remove it from the tree, because we add an new
-	# object with the same name immediately.
-	remove_child(bricks_node)
-	
-	# delete all active balls
-	for child in balls_node.get_children():
-		child.queue_free()
+	update_instructions()
 
 func load_level():
-	bricks_node = levels[(level-1)%3].instance()
-	bricks_node.name = "bricks"
-	add_child(bricks_node)
+	get_node("bricks").replace_by(levels[(level-1)%3].instance())
+	var bricks = get_node("bricks")
+	bricks.connect("brick_broken", self, "_on_brick_broken")
+	bricks.connect("level_clear", self, "_on_level_clear")

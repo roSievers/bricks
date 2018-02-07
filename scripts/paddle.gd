@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const ball_scene = preload("res://scenes/ball.tscn")
 
-var max_speed = 500
+var max_speed = 600
 
 func _physics_process(delta):
 	var target = get_viewport().get_mouse_position().x
@@ -19,4 +19,7 @@ func _input(event):
 			var balls = get_node("/root/world/balls")
 			balls.add_child(ball)
 			
-			get_node("/root/world").update_instructions()
+			var world = get_node("/root/world")
+			ball.connect("dropped", world, "_on_ball_dropped")
+			# TODO: Maybe this should use signals.
+			world._on_ball_spawned()

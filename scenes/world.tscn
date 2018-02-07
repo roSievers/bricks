@@ -5,7 +5,7 @@
 [ext_resource path="res://sprites/paddle.png" type="Texture" id=3]
 [ext_resource path="res://scenes/levels/level_1.tscn" type="PackedScene" id=4]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 40, 4 )
@@ -36,7 +36,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="collision" type="CollisionShape2D" parent="paddle" index="1"]
 
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="reflector" type="Position2D" parent="paddle" index="2"]
 
@@ -60,7 +60,9 @@ polygon = PoolVector2Array( 0, 384, 0, 0, 640, 0, 640, 384, 704, 384, 704, -64, 
 
 [node name="bricks" parent="." index="2" instance=ExtResource( 4 )]
 
-[node name="score" type="Label" parent="." index="3"]
+[node name="balls" type="Node" parent="." index="3"]
+
+[node name="score" type="Label" parent="." index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -80,7 +82,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="level" type="Label" parent="." index="4"]
+[node name="health" type="Label" parent="." index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -88,7 +90,27 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 128.0
 margin_top = 16.0
-margin_right = 224.0
+margin_right = 202.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Health: 100"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="level" type="Label" parent="." index="6"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 512.0
+margin_top = 16.0
+margin_right = 608.0
 margin_bottom = 32.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 2
@@ -96,13 +118,12 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 text = "Level: 1"
+align = 2
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="balls" type="Node" parent="." index="5"]
-
-[node name="instructions" type="Label" parent="." index="6"]
+[node name="instructions" type="Label" parent="." index="7"]
 
 anchor_left = 0.0
 anchor_top = 0.0

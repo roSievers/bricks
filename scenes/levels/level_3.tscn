@@ -1,131 +1,131 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scenes/brick.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/level.gd" type="Script" id=1]
+[ext_resource path="res://scenes/brick.tscn" type="PackedScene" id=2]
 
 [node name="bricks" type="Node2D"]
 
 editor/display_folded = true
+script = ExtResource( 1 )
 
-[node name="brick50" parent="." index="0" instance=ExtResource( 1 )]
+[node name="brick50" parent="." index="0" instance=ExtResource( 2 )]
 
 position = Vector2( 266.379, 148.488 )
 rotation = -0.678736
 
-[node name="brick64" parent="." index="1" instance=ExtResource( 1 )]
+[node name="brick64" parent="." index="1" instance=ExtResource( 2 )]
 
 position = Vector2( 579.513, 127.259 )
 rotation = -0.678736
 
-[node name="brick41" parent="." index="2" instance=ExtResource( 1 )]
+[node name="brick41" parent="." index="2" instance=ExtResource( 2 )]
 
 position = Vector2( 286.593, 55.6093 )
 rotation = 0.749377
 
-[node name="brick42" parent="." index="3" instance=ExtResource( 1 )]
+[node name="brick42" parent="." index="3" instance=ExtResource( 2 )]
 
 position = Vector2( 599.727, 34.3798 )
 rotation = 0.749377
-scale = Vector2( 1, 1 )
 
-[node name="brick54" parent="." index="4" instance=ExtResource( 1 )]
+[node name="brick54" parent="." index="4" instance=ExtResource( 2 )]
 
 position = Vector2( 217.285, 193.093 )
 rotation = -0.790562
 initial_hitpoints = 2
 
-[node name="brick63" parent="." index="5" instance=ExtResource( 1 )]
+[node name="brick63" parent="." index="5" instance=ExtResource( 2 )]
 
 position = Vector2( 530.42, 171.864 )
 rotation = -0.790562
-scale = Vector2( 1, 1 )
 initial_hitpoints = 2
 
-[node name="brick45" parent="." index="6" instance=ExtResource( 1 )]
+[node name="brick45" parent="." index="6" instance=ExtResource( 2 )]
 
 position = Vector2( 299.861, 102.868 )
 rotation = -1.47455
 initial_hitpoints = 2
 
-[node name="brick62" parent="." index="7" instance=ExtResource( 1 )]
+[node name="brick62" parent="." index="7" instance=ExtResource( 2 )]
 
 position = Vector2( 612.996, 81.6385 )
 rotation = -1.47455
 initial_hitpoints = 2
 
-[node name="brick51" parent="." index="8" instance=ExtResource( 1 )]
+[node name="brick51" parent="." index="8" instance=ExtResource( 2 )]
 
 position = Vector2( 162.925, 218.225 )
 rotation = 0.77131
 initial_hitpoints = 2
 
-[node name="brick59" parent="." index="9" instance=ExtResource( 1 )]
+[node name="brick59" parent="." index="9" instance=ExtResource( 2 )]
 
 position = Vector2( 476.06, 196.996 )
 rotation = 0.77131
 initial_hitpoints = 2
 
-[node name="brick53" parent="." index="10" instance=ExtResource( 1 )]
+[node name="brick53" parent="." index="10" instance=ExtResource( 2 )]
 
 position = Vector2( 128.819, 181.815 )
 rotation = 0.789331
 initial_hitpoints = 2
 
-[node name="brick58" parent="." index="11" instance=ExtResource( 1 )]
+[node name="brick58" parent="." index="11" instance=ExtResource( 2 )]
 
 position = Vector2( 441.954, 160.586 )
 rotation = 0.789331
 initial_hitpoints = 2
 
-[node name="brick47" parent="." index="12" instance=ExtResource( 1 )]
+[node name="brick47" parent="." index="12" instance=ExtResource( 2 )]
 
 position = Vector2( 232.273, 66.3019 )
 rotation = -0.717403
 initial_hitpoints = 2
 
-[node name="brick55" parent="." index="13" instance=ExtResource( 1 )]
+[node name="brick55" parent="." index="13" instance=ExtResource( 2 )]
 
 position = Vector2( 545.407, 45.0724 )
 rotation = -0.717403
 initial_hitpoints = 2
 
-[node name="brick60" parent="." index="14" instance=ExtResource( 1 )]
+[node name="brick60" parent="." index="14" instance=ExtResource( 2 )]
 
 position = Vector2( 82.0682, 135.376 )
 rotation = 1.03428
 initial_hitpoints = 2
 
-[node name="brick61" parent="." index="15" instance=ExtResource( 1 )]
+[node name="brick61" parent="." index="15" instance=ExtResource( 2 )]
 
 position = Vector2( 395.203, 114.146 )
 rotation = 1.03428
 initial_hitpoints = 2
 
-[node name="brick46" parent="." index="16" instance=ExtResource( 1 )]
+[node name="brick46" parent="." index="16" instance=ExtResource( 2 )]
 
 position = Vector2( 166.323, 80.1558 )
 rotation = 0.57514
 
-[node name="brick49" parent="." index="17" instance=ExtResource( 1 )]
+[node name="brick49" parent="." index="17" instance=ExtResource( 2 )]
 
 position = Vector2( 479.457, 58.9264 )
 rotation = 0.57514
 
-[node name="brick48" parent="." index="18" instance=ExtResource( 1 )]
+[node name="brick48" parent="." index="18" instance=ExtResource( 2 )]
 
 position = Vector2( 120.547, 47.6482 )
 rotation = 0.0757917
 
-[node name="brick52" parent="." index="19" instance=ExtResource( 1 )]
+[node name="brick52" parent="." index="19" instance=ExtResource( 2 )]
 
 position = Vector2( 433.681, 26.4188 )
 rotation = 0.0757917
 
-[node name="brick56" parent="." index="20" instance=ExtResource( 1 )]
+[node name="brick56" parent="." index="20" instance=ExtResource( 2 )]
 
 position = Vector2( 75.0822, 74.8484 )
 rotation = -0.998697
 
-[node name="brick57" parent="." index="21" instance=ExtResource( 1 )]
+[node name="brick57" parent="." index="21" instance=ExtResource( 2 )]
 
 position = Vector2( 388.217, 53.619 )
 rotation = -0.998697
